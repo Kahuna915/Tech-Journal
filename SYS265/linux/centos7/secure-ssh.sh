@@ -4,26 +4,21 @@
 #adds a public key from the local repo or curled from the remote repo
 #removes roots ability to ssh in
 echo Create user name?
-read $1`
-sudo adduser $1
+read USERNAME
 
-echo Password for user?
-read $2
-sudo passwd $2
-
-
-
-
+sudo useradd -m -d /home/$USERNAME -s /bin/bash $USERNAME
+sudo mkdir /home/$USERNAME/.ssh
+sudo cp /home/noah/Tech-Journal/SYS265/linux/public-keys/id_rsa.pub /home/$USERNAME/.ssh/authorized_keys
+sudo chmod 700 /home/$USERNAME/.ssh
+sudo chmod 600 /home/$USERNAME/.ssh/authorized_keys
+sudo chown -R $USERNAME:$USERNAME /home/$USERNAME/.ssh
 
 
-echo Where do you want to SSH to?
-read $3
 
-ssh-copy-id -i ~/.ssh/id_rsa.pub $1@$3
-sudo -i | $2
 
-sed -i 's/PermitRootLogin yes/PermitRootLogin no/g' /etc/ssh/sshd_config
-systemctl restart sshd.service
+
+#sed -i 's/PermitRootLogin yes/PermitRootLogin no/g' /etc/ssh/sshd_config
+#systemctl restart sshd.service
 
 
 
