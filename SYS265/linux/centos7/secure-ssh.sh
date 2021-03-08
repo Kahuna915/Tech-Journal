@@ -17,8 +17,8 @@ sudo chown -R $USERNAME:$USERNAME /home/$USERNAME/.ssh
 
 
 
-#sed -i 's/PermitRootLogin yes/PermitRootLogin no/g' /etc/ssh/sshd_config
-#systemctl restart sshd.service
+sudo sed -i 's/PermitRootLogin yes/PermitRootLogin no/g' /etc/ssh/sshd_config
+sudo systemctl restart sshd.service
 
 
 
